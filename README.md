@@ -7,7 +7,7 @@
 The Note Taker Application is a simple backend application that manages notes stored in a JSON file. It provides functionality to read, write, add, and remove notes. Users can create, view, and delete notes through a user-friendly interface.
 
 ### Links
-* [GitHub Repository](https://github.com/YourUsername/Note-Taker-App)
+* [GitHub Repository](https://github.com/BryanPeens/note-taker)
 
 ## Table of Contents
 1. [Installation](#installation)
