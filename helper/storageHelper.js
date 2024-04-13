@@ -2,28 +2,33 @@ const util = require('util');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
+// Promisify file system functions
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
-class NoteStore {
+class StorageHelper {
+  // Reads data from a file asynchronously
   async readFromFile() {
     try {
       const data = await readFileAsync('db/db.json', 'utf8');
       return data;
     } catch (err) {
       console.error("Error reading file:", err);
-      return [];
+      throw err; // Re-throw the error for handling in the calling code
     }
   }
 
+  // Writes data to a file asynchronously
   async writeToFile(notes) {
     try {
       await writeFileAsync('db/db.json', JSON.stringify(notes));
     } catch (err) {
       console.error("Error writing file:", err);
+      throw err; // Re-throw the error for handling in the calling code
     }
   }
 
+  // Retrieves all notes from the file
   async getAllNotes() {
     try {
       const notesData = await this.readFromFile();
@@ -36,10 +41,11 @@ class NoteStore {
       return Array.isArray(parsedNotes) ? parsedNotes : [];
     } catch (err) {
       console.error("Error getting notes:", err);
-      return [];
+      throw err; // Re-throw the error for handling in the calling code
     }
   }
 
+  // Adds a new note to the file
   async addNoteToStore(newNoteData) {
     try {
       const { title, text } = newNoteData;
@@ -54,18 +60,20 @@ class NoteStore {
       return newNote;
     } catch (err) {
       console.error("Error adding note:", err);
-      return null;
+      throw err; // Re-throw the error for handling in the calling code
     }
   }
 
+  // Removes a note from the file
   async removeNoteFromStore(noteId) {
     try {
       const filteredNotes = await this.getAllNotes().then((notes) => notes.filter((note) => note.id !== noteId));
       await this.writeToFile(filteredNotes);
     } catch (err) {
       console.error("Error removing note:", err);
+      throw err; // Re-throw the error for handling in the calling code
     }
   }
 }
 
-module.exports = new NoteStore();
+module.exports = new StorageHelper();
