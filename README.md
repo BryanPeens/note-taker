@@ -54,7 +54,7 @@ The Note Taker Application does not currently have any automated tests.
 
 ## Questions
 
-For any questions or feedback, please feel free to contact me through my [GitHub profile](https://github.com/BryanPeens) or via email at [your.email@example.com](mailto:peensbryan75@gmail.com).
+For any questions or feedback, please feel free to contact me through my [GitHub profile](https://github.com/BryanPeens) or via email at [peensbryan75@gmail.com](mailto:peensbryan75@gmail.com).
 
 ## License
 
